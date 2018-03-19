@@ -5,7 +5,12 @@
     <title>Thymer</title>
 </head>
 <body>
-<script type="application/javascript" src="vendor.bundle.js"></script>
-<script type="application/javascript" src="app.bundle.js"></script>
+    <section ng-app="thymerApp">
+        <div id="thymer" ng-view>
+            <h2>Thymer</h2>                
+        </div>    
+    </section>
+    <script type="application/javascript" src="vendor.bundle.js"></script>
+    <script type="application/javascript" src="app.bundle.js"></script>
 </body>
 </html>

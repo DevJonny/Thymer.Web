@@ -61,3 +61,6 @@ typings/
 node_modules/*
 .idea/*
 
+# User added
+build/*
+

@@ -24,7 +24,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'build/vendor.bundle.js'  }),
+        new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js'  }),
         //new UglifyJsPlugin({
         //    test: /\.js($|\?)/i
         //})
