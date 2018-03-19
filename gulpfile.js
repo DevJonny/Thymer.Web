@@ -58,7 +58,8 @@ gulp.task('watch:css', function () {
 
 gulp.task('build', function() {
     var jsSourceFiles = ['src/js/bundle.js',
-                        'node_modules/jquery/dist/jquery.min.js',
+                        'node_modules/jquery/dist/jquery.slim.min.js',
+                        'node_modules/popper.js/dist/umd/popper.min.js',
                         'node_modules/angular/angular.min.js',
                         'node_modules/angular-route/angular-route.min.js',
                         'node_modules/bootstrap/dist/js/bootstrap.min.js']
