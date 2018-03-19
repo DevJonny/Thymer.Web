@@ -1,3 +1,1 @@
-export default function thymerModule() {
-    var thymerApp = angular.module('thymerApp', ['ngRoute']);
-}
+var thymerApp = angular.module('thymerApp', ['ngRoute']);
