@@ -1,4 +1,4 @@
-function() {
+(function() {
     'use strict';
 
     angular
@@ -8,4 +8,4 @@ function() {
     function homeController($scope, $location, $filter, sprintService, sprintClass) {
         console.log('Hello world....')
     }
-}();
+})();

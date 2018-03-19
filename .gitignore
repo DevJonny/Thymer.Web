@@ -62,5 +62,5 @@ node_modules/*
 .idea/*
 
 # User added
-build/*
+dist/*
 
