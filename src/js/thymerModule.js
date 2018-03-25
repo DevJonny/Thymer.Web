@@ -1,1 +1,0 @@
-var thymerApp = angular.module('thymerApp', ['ngRoute']);

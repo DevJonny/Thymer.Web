@@ -25,11 +25,18 @@ gulp.task('less', function () {
         .pipe(gulp.dest('.'));
 });
 
-gulp.task('min:js', function () {
-    return gulp.src(['src/js/services/*.js', 'src/js/*.js', 'src/js/controllers/*.js'])
-        .pipe(concat('src/js/bundle.js'))
-        .pipe(uglify())
+gulp.task('concat:js', function() {
+    return gulp.src(['src/js/model/*.js', 'src/js/services/*.js', 'src/js/app/*.js', 'src/js/route/*.js', 'src/js/controllers/*.js'])
+        .pipe(babel())
+        .pipe(concat('dist/js/bundle.js'))
         .pipe(gulp.dest('.'));
+})
+
+gulp.task('min:js', function () {
+    return gulp.src(['dist/js/bundle.js'])
+        .pipe(rename({suffix: '.min' }))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('clean', function () {
@@ -37,40 +44,45 @@ gulp.task('clean', function () {
 });
 
 gulp.task('clean:js', function () {
-    return del('src/js/bundle.js');
+    return del('dist/js/bundle.js');
 });
 
 gulp.task('clean:css', function () {
     return del('styles/css/site.min.css');
 });
 
-gulp.task('default:js', gulp.series('clean:js', 'min:js'));
+gulp.task('default:js', gulp.series('clean:js', 'concat:js', 'min:js'));
 
 gulp.task('default:css', gulp.series('clean:css', 'less'));
 
+gulp.task('default:html', function() {
+    return gulp.src('src/html/*/*.html').pipe(gulp.dest('dist'));
+});
+
 gulp.task('watch:js', function () {
-    return gulp.watch('styles/js/*.js', gulp.series('default:js'));
+    return gulp.watch('src/js/**/*.js', gulp.series('default:js'));
 });
 
 gulp.task('watch:css', function () {
-    return gulp.watch('styles/less/**/*.less', gulp.series('default:css'));
+    return gulp.watch('src/styles/less/**/*.less', gulp.series('default:css'));
+});
+
+gulp.task('watch:html', function () {
+    return gulp.watch('src/html/templates/*.html', gulp.series('default:html'));
 });
 
 gulp.task('build', function() {
-    var jsSourceFiles = ['src/js/bundle.js',
+    var jsSourceFiles = [
                         'node_modules/jquery/dist/jquery.slim.min.js',
                         'node_modules/popper.js/dist/umd/popper.min.js',
                         'node_modules/angular/angular.min.js',
                         'node_modules/angular-route/angular-route.min.js',
-                        'node_modules/bootstrap/dist/js/bootstrap.min.js']
+                        'node_modules/bootstrap/dist/js/bootstrap.min.js',
+                        'node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js']
 
     var cssSourceFiles = ['node_modules/bootstrap/dist/css/*.min.css',
+                          'node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css',
                           'src/styles/css/site.min.css'];
-
-    del('dist/js/*');
-    del('dist/css/*');
-    del('dist/html/*');
-    del('dist/*');
 
     gulp.src(jsSourceFiles)
         .pipe(gulp.dest('dist/js'));
@@ -83,4 +95,4 @@ gulp.task('build', function() {
 
 })
 
-gulp.task('default', gulp.series('clean', 'less', 'min:js', 'build'));
+gulp.task('default', gulp.series('clean', 'less', 'concat:js', 'min:js', 'build'));

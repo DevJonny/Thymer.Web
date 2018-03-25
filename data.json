@@ -1,0 +1,48 @@
+{
+  "meals": [
+    {
+      "id": "Meal-1",
+      "name": "Roast Dinner",
+      "duration": 320000,
+      "steps": [
+        {
+          "id": "Step-1",
+          "name": "Cook meat",
+          "duration": 315000
+        },
+        {
+          "id": "Step-2",
+          "name": "Cook Potatoes",
+          "duration": 30000
+        },
+        {
+          "id": "Step-3",
+          "name": "Serve",
+          "duration": 5000
+        }
+      ]
+    },
+    {
+      "id": "Meal-2",
+      "name": "Breakfast",
+      "duration": 60000,
+      "steps": [
+        {
+          "id": "Step-4",
+          "name": "Pour cereal",
+          "duration": 30000
+        },
+        {
+          "id": "Step-5",
+          "name": "Pour milk",
+          "duration": 25000
+        },
+        {
+          "id": "Step-6",
+          "name": "Eat!",
+          "duration": 5000
+        }
+      ]
+    }
+  ]
+}

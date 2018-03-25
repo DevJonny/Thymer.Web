@@ -1,1 +1,0 @@
-var thymerApp=angular.module("thymerApp",["ngRoute"]);thymerApp.config(["$routeProvider",function(o){o.when("/",{templateUrl:"../templates/_Home.html",controller:"homeController"}).otherwise({redirectTo:"/"})}]),function(){"use strict";angular.module("thymerApp").controller("homeController",["$scope","$location",function(o,e,r,t,l){console.log("Hello world....")}])}();
