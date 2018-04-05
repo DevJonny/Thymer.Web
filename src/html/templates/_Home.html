@@ -1,10 +1,7 @@
 <section id="home">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Thymer</a>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Recipe</button>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <button class="btn btn-outline-success" ng-click="goAdd()">Add Recipe</button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -15,7 +12,7 @@
     <div id="meal-list" class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="card" ng-repeat="meal in meals">
-                <div class="card-body">
+                <div class="card-body" ng-click="goEdit(meal.id)">
                     <div class="card-title">
                         <h3>{{meal.name}} <span class="badge badge-pill badge-dark">{{meal.formattedDuration()}}</span></h3>
                     </div>

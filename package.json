@@ -6,7 +6,8 @@
     "start": "http-server"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "npm": "^5.8.0"
   },
   "devDependencies": {
     "angular": "^1.6.9",
@@ -14,7 +15,6 @@
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "bootstrap": "4.0.0",
-    "bootstrap-material-design": "^4.1.1",
     "del": "^3.0.0",
     "font-awesome": "^4.7.0",
     "gulp": "^4.0.0",

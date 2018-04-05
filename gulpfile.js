@@ -77,11 +77,9 @@ gulp.task('build', function() {
                         'node_modules/popper.js/dist/umd/popper.min.js',
                         'node_modules/angular/angular.min.js',
                         'node_modules/angular-route/angular-route.min.js',
-                        'node_modules/bootstrap/dist/js/bootstrap.min.js',
-                        'node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js']
+                        'node_modules/bootstrap/dist/js/bootstrap.min.js']
 
     var cssSourceFiles = ['node_modules/bootstrap/dist/css/*.min.css',
-                          'node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css',
                           'src/styles/css/site.min.css'];
 
     gulp.src(jsSourceFiles)
