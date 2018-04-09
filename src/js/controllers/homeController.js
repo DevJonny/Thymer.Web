@@ -8,14 +8,18 @@
     function homeController($scope, $location, $filter, mealService, mealClass) {
         $scope.meals = [];
 
-        $scope.$watch('meals', (newValue) => { console.log(newValue);});
+        $scope.goAdd = () => {
+            $location.path('/New');
+        };
+
+        $scope.goEdit = (id) => {
+            $location.path(`/Edit/${id}`);
+        };
 
         activate();
 
         function activate() {
-            mealService.get().then((response) => {
-                $scope.meals = response.data.meals.map(mealClass.build);
-            })
+            $scope.meals = mealService.get().map(mealClass.build);
         }
     }
 })();

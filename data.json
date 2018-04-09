@@ -1,7 +1,7 @@
 {
   "meals": [
     {
-      "id": "Meal-1",
+      "id": "df0f72ed-dbe5-4973-bf8f-8af5eb4576ca",
       "name": "Roast Dinner",
       "duration": 320000,
       "steps": [
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "id": "Meal-2",
+      "id": "df0f72ed-dbe5-4973-bf8f-8af5eb4576ca",
       "name": "Breakfast",
       "duration": 60000,
       "steps": [
