@@ -17,12 +17,12 @@ gulp.task('less', function () {
     return gulp.src(['src/styles/less/index.less', 'src/styles/less/module/*.less'])
         .pipe(plumber())
         .pipe(less())
-        .pipe(concat('src/styles/css/site.css'))
+        .pipe(concat('site.css'))
         .pipe(cssmin())
         .pipe(rename({
             suffix: '.min'
         }))
-        .pipe(gulp.dest('.'));
+        .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('concat:js', function() {
@@ -40,7 +40,7 @@ gulp.task('min:js', function () {
 });
 
 gulp.task('clean', function () {
-    return del(['styles/css/site.min.css', 'src/js/bundle.js']);
+    return del(['styles/css/site.min.css', 'dist/css/site.min.css', 'src/js/bundle.js']);
 });
 
 gulp.task('clean:js', function () {
@@ -48,7 +48,7 @@ gulp.task('clean:js', function () {
 });
 
 gulp.task('clean:css', function () {
-    return del('styles/css/site.min.css');
+    return del(['styles/css/site.min.css', 'dist/css/site.min.css']);
 });
 
 gulp.task('default:js', gulp.series('clean:js', 'concat:js', 'min:js'));
