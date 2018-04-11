@@ -10,13 +10,17 @@
         </div>
     </nav>
     <div id="meal-list" class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="card" ng-repeat="meal in meals">
-                <div class="card-body" ng-click="goEdit(meal.id)">
-                    <div class="card-title">
-                        <h3>{{meal.name}} <span class="badge badge-pill badge-dark">{{meal.formattedDuration()}}</span></h3>
+        <div class="meal-list__items col-md-12 col-sm-12 col-xs-12">
+            <div class="meal card" ng-repeat="meal in meals">
+                <div class="meal__body card-body" ng-click="goEdit(meal.id)">
+                    <div class="meal__title card-title">
+                        <h3 class="meal__heading">
+                            {{meal.name}}
+                            <span class="meal__edit"><i class="fa fa-pencil-alt"></i></span>
+                            <span class="meal__badge badge badge-pill badge-dark">{{meal.formattedDuration()}}</span>
+                        </h3>
                     </div>
-                    <p>{{meal.steps.length}} steps</p>
+                    <p class="meal__steps">{{meal.steps.length}} steps</p>
                 </div>
             </div>
         </div>
