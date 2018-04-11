@@ -13,11 +13,7 @@ function mealClass(stepClass) {
     Meal.prototype.convertStepsToDuration = function() {
         var duration = 0;
 
-        this.steps.forEach((step) => {
-           duration += ((step.hours * 60) * 60) * 1000;
-           duration += (step.minutes * 60) * 1000;
-           duration += step.seconds * 1000;
-        });
+        this.steps.forEach((step) => duration += step.duration );
 
         this.duration = duration;
     };
@@ -37,10 +33,9 @@ function mealClass(stepClass) {
 
         meal.id = dto.id;
         meal.name = dto.name;
-        meal.duration = dto.duration;
         meal.steps = dto.steps ? dto.steps.map(stepClass.build) : [];
 
-        if (meal.duration === 0) meal.convertStepsToDuration();
+        meal.convertStepsToDuration();
 
         return meal;
     };

@@ -12,7 +12,7 @@ function mealService($http, $filter, $window, mealClass) {
         var allMeals = get().map(mealClass.build);
         var mealsForId = $filter('filter')(allMeals, { id: id });
 
-        return mealsForId.length !== 1 ? mealClass.build() : mealsForId[0];
+        return mealsForId.length !== 1 ? mealClass.build() : mealClass.build(mealsForId[0]);
     }
 
     function post(meal) {
@@ -20,7 +20,10 @@ function mealService($http, $filter, $window, mealClass) {
 
         if (!meals) meals = [];
 
-        meals.push(meal);
+        var index = meals.map((m) => { return m.id }).indexOf(meal.id);
+
+        if (index > -1) meals[index] = meal;
+        else meals.push(meal);
 
         $window.localStorage.meals = angular.toJson(meals);
     }

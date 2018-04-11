@@ -8,6 +8,12 @@ function stepClass() {
         this.seconds = 0;
     }
 
+    Step.prototype.parseDuration = function() {
+        this.duration += ((this.hours * 60) * 60) * 1000;
+        this.duration += (this.minutes * 60) * 1000;
+        this.duration += this.seconds * 1000;
+    };
+
     Step.prototype.formattedDuration = function () {
         var hours = Math.floor((this.duration % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((this.duration % (1000 * 60 * 60)) / (1000 * 60));
@@ -23,7 +29,13 @@ function stepClass() {
 
         step.id = dto.id;
         step.name = dto.name;
-        step.duration = dto.duration;
+        step.hours = dto.hours;
+        step.minutes = dto.minutes;
+        step.seconds = dto.seconds;
+
+        step.parseDuration();
+
+        return step;
     }
 
     return Step;
