@@ -1,0 +1,29 @@
+<section id="timer">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Thymer</a>
+        <div class="nav__controls">
+            <button class="nav__button btn btn-outline-light" ng-click="goHome()"><i class="fa fa-arrow-left"></i> Back</button>
+            <button class="nav__button btn btn-outline-light" ng-click="goEdit()"><i class="fa fa-pencil-alt"></i> Edit Meal</button>
+            <button class="nav__button btn btn-outline-success" ng-click="goRun()"><i class="fa fa-play"></i> Run Timer</button>
+            <button class="nav__button btn btn-outline-warning" ng-click="pauseRun()"><i class="fa fa-pause"></i> Pause Timer</button>
+            <button class="nav__button btn btn-outline-danger" ng-click="stopRun()"><i class="fa fa-stop"></i> Stop Timer</button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="meal-list" class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="card" ng-repeat="meal in meals">
+                <div class="card-body" ng-click="goEdit(meal.id)">
+                    <div class="card-title">
+                        <h3>{{meal.name}} <span class="badge badge-pill badge-dark">{{meal.formattedDuration()}}</span></h3>
+                    </div>
+                    <p>{{meal.steps.length}} steps</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
