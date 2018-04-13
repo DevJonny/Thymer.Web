@@ -1,6 +1,7 @@
 <section id="edit">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="nav__controls navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Thymer</a>
+        <button class="nav__button btn btn-outline-light" ng-click="goBack()"><i class="fa fa-arrow-left"></i> Back</button>
     </nav>
     <div id="meal-edit" class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -18,7 +19,7 @@
                         </div>
                         <form id="step" name="stepsForm">
                             <div class="btn-group btn-group-lg mt-3 mb-3">
-                                <button type="button" class="btn btn-lg btn-dark" ng-click="addStep()">Add step</button>
+                                <button type="button" class="btn btn-lg btn-dark" ng-click="addStep()"><i class="fa fa-plus"></i> Add step</button>
                             </div>
                             <div id="meal-steps" class="mb-3">
                                 <ul class="list-group" ng-repeat="step in meal.steps">
@@ -58,8 +59,8 @@
                         </form>
                         <div class="btn-toolbar float-right" role="toolbar">
                             <div class="btn-group-lg" role="group">
-                                <button type="button" class="btn btn-lg btn-danger" ng-click="cancel()">Cancel</button>
-                                <button type="button" class="btn btn-lg btn-success" ng-disabled="mealForm.$invalid || stepsForm.$invalid" ng-click="saveMeal()">Save Meal</button>
+                                <button type="button" class="btn btn-lg btn-danger" ng-click="goBack()"><i class="fa fa-ban"></i> Cancel</button>
+                                <button type="button" class="btn btn-lg btn-success" ng-disabled="mealForm.$invalid || stepsForm.$invalid" ng-click="saveMeal()"><i class="fa fa-save"></i> Save Meal</button>
                             </div>
                         </div>
                     </form>

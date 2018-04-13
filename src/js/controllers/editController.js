@@ -24,7 +24,7 @@
             $location.path('/');
         };
 
-        $scope.cancel = () => {
+        $scope.goBack = () => {
             $location.path('/');
         };
 
