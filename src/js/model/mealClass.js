@@ -1,10 +1,10 @@
 'use strict';
 
-function mealClass(stepClass) {
+function mealClass(util, stepClass) {
 
     function Meal() {
         var self = this;
-        self.id = create_UUID();
+        self.id = util.createUUID();
         self.name = '';
         self.duration = 0;
         self.steps = [];
@@ -19,11 +19,7 @@ function mealClass(stepClass) {
     };
 
     Meal.prototype.formattedDuration = function () {
-        var hours = Math.floor((this.duration % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((this.duration % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor(((this.duration % (1000 * 60)) / 1000));
-
-        return `${hours}h ${minutes}m ${seconds}s`;
+        return util.formatDuration(this.duration);
     };
 
     Meal.build = (dto) => {
