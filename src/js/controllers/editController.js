@@ -31,7 +31,7 @@
         activate();
 
         function activate() {
-            $scope.meal = mealService.getById($scope.id);
+            if ($scope.id) $scope.meal = mealService.getById($scope.id);
         }
     }
 })();
