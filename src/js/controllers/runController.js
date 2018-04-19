@@ -13,6 +13,7 @@
         $scope.nextStepTimer = 0;
         $scope.running = false;
         $scope.paused = false;
+        $scope.complete = false;
         $scope.timerId = 0;
 
         $scope.goHome = () => {
@@ -34,6 +35,15 @@
 
             $scope.timerId = setInterval(() => {
                 if ($scope.paused) return;
+
+                if ($scope.currentTimer <= 0) {
+                    $scope.running = false;
+                    $scope.complete = true;
+                    $scope.currentTimer = 0;
+                    clearInterval($scope.timerId);
+                    $scope.$apply();
+                    return;
+                }
 
                 $scope.currentTimer -= 1000;
                 $scope.nextStepTimer -= 1000;
