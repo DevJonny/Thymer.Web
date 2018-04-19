@@ -1,0 +1,67 @@
+<section id="timer">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Thymer</a>
+        <div class="nav__controls">
+            <button class="nav__button btn btn-outline-light" ng-click="goHome()"><i class="fa fa-arrow-left"></i> Back</button>
+            <button class="nav__button btn btn-outline-light" ng-click="goEdit()"><i class="fa fa-pencil-alt"></i> Edit Meal</button>
+            <button class="nav__button btn btn-outline-success" ng-hide="running || paused" ng-click="doRun()"><i class="fa fa-play"></i><span ng-hide="paused">Run Timer</span></button>
+            <button class="nav__button btn btn-outline-success" ng-show="paused" ng-click="doResume()"><span ng-show="paused">Resume Timer</span></button>
+            <button class="nav__button btn btn-outline-warning" ng-hide="paused || !running" ng-click="doPause()"><i class="fa fa-pause"></i> Pause Timer</button>
+            <button class="nav__button btn btn-outline-danger" ng-show="running || paused" ng-click="doStop()"><i class="fa fa-stop"></i> Stop Timer</button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="meal-list" class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h1>{{meal.name}} ready in....</h1>
+                    </div>
+                    <h2 class="float-right"><span class="badge badge-pill badge-dark">{{currentTimeLeft()}}</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 mt-lg-4 mt-md-3 mt-sm-2 mt-xs-1" ng-hide="complete" ng-show="meal.hasSteps()">
+            <div id="firststep-title" class="alert alert-success" role="alert">
+                <span ng-show="nextStepIndex === 0">First step is...</span>
+                <span ng-show="nextStepIndex <= meal.stepCount() && running">Current step is...</span>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h1>{{currentStep()}}!</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 mt-lg-4 mt-md-3 mt-sm-2 mt-xs-1" ng-show="meal.stepCount() > 1 && nextStepIndex > 0 && nextStepIndex < meal.stepCount()">
+            <div id="nextstep-title" class="alert alert-info" role="alert">Next step is...</div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h1>{{meal.steps[nextStepIndex].name}}</h1>
+                    </div>
+                    <h2 class="float-right"><span class="badge badge-pill badge-dark float-right">{{timeUntilNextStep()}}</span></h2>
+                </div>
+            </div>
+        </div>
+        <div id="steps" class="col-md-12 col-sm-12 col-xs-12" ng-show="remainingSteps().length > 0">
+            <div id="steps-title" class="alert alert-dark" role="alert">Upcoming steps...</div>
+            <div class="step card" ng-repeat="step in remainingSteps()">
+                <div class="step__body card-body">
+                    <div class="step__title card-title">
+                        <h1 class="step__heading">
+                            {{step.name}}
+                            <span class="step__badge badge badge-pill badge-dark float-right">{{step.formattedDuration()}}</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
