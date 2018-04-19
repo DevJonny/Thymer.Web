@@ -33,11 +33,10 @@
             $scope.running = true;
 
             $scope.timerId = setInterval(() => {
-                if ($scope.paused) { console.log('Paused tick....'); return; }
+                if ($scope.paused) return;
 
                 $scope.currentTimer -= 1000;
                 $scope.nextStepTimer -= 1000;
-                console.log('Tick...');
                 $scope.$apply();
             }, 1000);
         };
