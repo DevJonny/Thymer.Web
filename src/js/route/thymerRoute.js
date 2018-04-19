@@ -12,8 +12,11 @@ thymerApp.config([
         {
             templateUrl: '../templates/_Edit.html',
             controller: 'editController'
-        })
-        .otherwise({
+        }).when('/Run/:id',
+        {
+            templateUrl: '../templates/_Run.html',
+            controller: 'runController'
+        }).otherwise({
             redirectTo: '/'
         });
     }

@@ -16,6 +16,10 @@
             $location.path(`/Edit/${id}`);
         };
 
+        $scope.goRun = (id) => {
+            $location.path(`/Run/${id}`);
+        };
+
         activate();
 
         function activate() {

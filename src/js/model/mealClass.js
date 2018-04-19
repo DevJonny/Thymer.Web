@@ -11,15 +11,23 @@ function mealClass(util, stepClass) {
     }
 
     Meal.prototype.convertStepsToDuration = function() {
-        var duration = 0;
 
-        this.steps.forEach((step) => duration += step.duration );
+        var orderedSteps = this.steps.sort((a, b) => { return a.duration < b.duration; });
 
-        this.duration = duration;
+        if (orderedSteps.length > 0 ) this.duration = orderedSteps[0].duration;
+        else this.duration = 0;
     };
 
     Meal.prototype.formattedDuration = function () {
         return util.formatDuration(this.duration);
+    };
+
+    Meal.prototype.stepCount = function() {
+        return this.steps.length;
+    };
+
+    Meal.prototype.hasSteps = function() {
+        return this.steps.length > 0;
     };
 
     Meal.build = (dto) => {

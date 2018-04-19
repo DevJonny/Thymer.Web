@@ -15,7 +15,7 @@ function stepClass(util) {
     };
 
     Step.prototype.formattedDuration = function () {
-        return util.formatDuration(duration);
+        return util.formatDuration(this.duration);
     };
 
     Step.build = function(dto) {
