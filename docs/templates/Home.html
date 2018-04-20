@@ -1,0 +1,28 @@
+<section id="home">
+    <nav class="nav__controls navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Thymer</a>
+        <button class="nav__button btn btn-outline-success" ng-click="goAdd()"><i class="fa fa-plus"></i> Add Recipe</button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="meal-list" class="row">
+        <div class="meal-list__items col-md-12 col-sm-12 col-xs-12">
+            <div class="meal card" ng-repeat="meal in meals">
+                <div class="meal__body card-body" ng-click="goRun(meal.id)">
+                    <div class="meal__title card-title">
+                        <h3 class="meal__heading">
+                            {{meal.name}}
+                            <span class="meal__edit"><i class="fa fa-pencil-alt"  ng-click="goEdit(meal.id); $event.stopPropagation()"></i></span>
+                            <span class="meal__badge badge badge-pill badge-dark">{{meal.formattedDuration()}}</span>
+                        </h3>
+                    </div>
+                    <p class="meal__steps">{{meal.steps.length}} steps</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

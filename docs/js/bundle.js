@@ -169,16 +169,16 @@ function util() {
 
 thymerApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
-        templateUrl: '../templates/_Home.html',
+        templateUrl: './templates/Home.html',
         controller: 'homeController'
     }).when('/New', {
-        templateUrl: '../templates/_Edit.html',
+        templateUrl: './templates/Edit.html',
         controller: 'editController'
     }).when('/Edit/:id', {
-        templateUrl: '../templates/_Edit.html',
+        templateUrl: './templates/Edit.html',
         controller: 'editController'
     }).when('/Run/:id', {
-        templateUrl: '../templates/_Run.html',
+        templateUrl: './templates/Run.html',
         controller: 'runController'
     }).otherwise({
         redirectTo: '/'
