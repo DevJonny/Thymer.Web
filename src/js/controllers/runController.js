@@ -3,14 +3,16 @@
 
     angular
         .module('thymerApp')
-        .controller('runController', ['$scope', '$routeParams', '$location', '$filter', 'util', 'mealService', 'mealClass', runController]);
+        .controller('runController', ['$scope', '$routeParams', '$location', '$filter', 'util', 'mealService', 'mealClass', 'stepClass', runController]);
 
-    function runController($scope, $routeParams, $location, $filter, util, mealService, mealClass) {
+    function runController($scope, $routeParams, $location, $filter, util, mealService, mealClass, stepClass) {
         $scope.id = $routeParams.id;
         $scope.meal = mealClass.build();
-        $scope.nextStepIndex = 0;
+        $scope.currentStep;
+        $scope.nextStep;
         $scope.currentTimer = 0;
         $scope.nextStepTimer = 0;
+        $scope.pastSteps = [];
         $scope.running = false;
         $scope.paused = false;
         $scope.complete = false;
@@ -25,10 +27,12 @@
         };
 
         $scope.doRun = () => {
-            if (!$scope.paused) $scope.nextStepIndex++;
 
-            if ($scope.nextStepIndex < $scope.meal.steps.length) {
-                $scope.nextStepTimer = $scope.currentTimer - $scope.meal.steps[$scope.nextStepIndex].duration;
+            $scope.currentStep = $scope.nextStep;
+            $scope.nextStep = $scope.meal.steps.length > 0 ? $scope.meal.steps.shift() : stepClass.build();
+
+            if ($scope.hasRemainingSteps()) {
+                $scope.nextStepTimer = $scope.currentTimer - $scope.nextStep.duration;
             } else $scope.nextStepTimer = 0;
 
             $scope.running = true;
@@ -36,7 +40,32 @@
             $scope.timerId = setInterval(() => {
                 if ($scope.paused) return;
 
+                $scope.currentTimer -= 1000;
+                $scope.nextStepTimer = $scope.nextStep
+                                            ? $scope.nextStepTimer - 1000
+                                            : 1;
+
+                var nextStepTimerElapsed = $scope.nextStepTimer <= 0;
+
+                if (nextStepTimerElapsed) {
+                    console.log(`${$scope.currentStep.name} is done!`)
+
+                    $scope.pastSteps.push($scope.currentStep);
+                    $scope.currentStep = $scope.nextStep;
+
+                    if ($scope.hasRemainingSteps()) {
+                        $scope.nextStep = $scope.meal.steps.shift();
+                        $scope.nextStepTimer = $scope.nextStep.duration
+                    }
+                    else {
+                        $scope.nextStep = null;
+                        $scope.nextStepTimer = 0;
+                    }
+                }
+
                 if ($scope.currentTimer <= 0) {
+                    console.log(`${$scope.meal.name} is complete!`);
+                    $scope.pastSteps.push($scope.currentStep);
                     $scope.running = false;
                     $scope.complete = true;
                     $scope.currentTimer = 0;
@@ -45,8 +74,6 @@
                     return;
                 }
 
-                $scope.currentTimer -= 1000;
-                $scope.nextStepTimer -= 1000;
                 $scope.$apply();
             }, 1000);
         };
@@ -54,7 +81,6 @@
         $scope.doStop = () => {
             clearInterval($scope.timerId);
 
-            $scope.nextStepIndex = 0;
             $scope.running = false;
             $scope.paused = false;
 
@@ -79,17 +105,14 @@
             return util.formatDuration($scope.nextStepTimer);
         };
 
-        $scope.currentStep = () => {
-            if (!$scope.meal.hasSteps()) return '';
-            if ($scope.nextStepIndex === 0) return $scope.meal.steps[0].name;
-
-            return $scope.meal.steps[$scope.nextStepIndex-1].name;
-        }
-
         $scope.remainingSteps = () => {
             if ($scope.nextStepIndex + 1 === $scope.meal.steps.length) return [];
 
             return $scope.meal.steps.slice($scope.nextStepIndex + 1);
+        };
+
+        $scope.hasRemainingSteps = () => {
+            return $scope.meal.stepCount() > 0;
         };
 
         activate();
@@ -97,6 +120,7 @@
         function activate() {
             $scope.meal = mealService.getById($scope.id);
             $scope.currentTimer = $scope.meal.duration;
+            $scope.nextStep = $scope.meal.steps.shift();
         }
     }
 })();
