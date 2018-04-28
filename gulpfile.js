@@ -88,6 +88,8 @@ gulp.task('build', function() {
         .pipe(gulp.dest('dist/css'));
     gulp.src('src/html/*/*.html')
         .pipe(gulp.dest('dist'));
+    gulp.src('src/assets/*')
+        .pipe(gulp.dest('dist'));
     return gulp.src('src/html/index.html')
         .pipe(gulp.dest('dist'));
 

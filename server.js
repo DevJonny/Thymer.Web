@@ -4,7 +4,7 @@ var app = express();
 app.use(express.static(__dirname + '/dist'));
 
 app.get("/", function(req, res) {
-    res.sendFile(__dirname + '/dist/index.html')
+    res.sendFile(__dirname + '/index.html')
 });
 
 app.get("/data.json", function(req, res) {

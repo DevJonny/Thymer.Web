@@ -48,7 +48,7 @@
                 var nextStepTimerElapsed = $scope.nextStepTimer <= 0;
 
                 if (nextStepTimerElapsed) {
-                    console.log(`${$scope.currentStep.name} is done!`)
+                    new Audio('/assets/step_finished.mp3').play();
 
                     $scope.pastSteps.push($scope.currentStep);
                     $scope.currentStep = $scope.nextStep;
@@ -64,7 +64,7 @@
                 }
 
                 if ($scope.currentTimer <= 0) {
-                    console.log(`${$scope.meal.name} is complete!`);
+                    new Audio('/assets/meal_finished.mp3').play();
                     $scope.pastSteps.push($scope.currentStep);
                     $scope.running = false;
                     $scope.complete = true;
