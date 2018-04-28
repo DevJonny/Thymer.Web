@@ -270,6 +270,16 @@ thymerApp.config(['$routeProvider', function ($routeProvider) {
         $scope.complete = false;
         $scope.timerId = 0;
 
+        $scope.reset = function () {
+            $scope.complete = false;
+            $scope.currentTimer = 0;
+            $scope.nextStepTimer = 0;
+            $scope.currentTimer = 0;
+            $scope.nextStepTimer = 0;
+            $scope.pastSteps = [];
+            $scope.timerId = 0;
+        };
+
         $scope.goHome = function () {
             $location.path('');
         };
@@ -279,6 +289,11 @@ thymerApp.config(['$routeProvider', function ($routeProvider) {
         };
 
         $scope.doRun = function () {
+
+            if ($scope.complete) {
+                $scope.reset();
+                activate();
+            }
 
             $scope.currentStep = $scope.nextStep;
             $scope.nextStep = $scope.meal.steps.length > 0 ? $scope.meal.steps.shift() : stepClass.build();
@@ -363,6 +378,8 @@ thymerApp.config(['$routeProvider', function ($routeProvider) {
         $scope.hasRemainingSteps = function () {
             return $scope.meal.stepCount() > 0;
         };
+
+        $scope.reset();
 
         activate();
 

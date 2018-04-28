@@ -18,6 +18,16 @@
         $scope.complete = false;
         $scope.timerId = 0;
 
+        $scope.reset = () => {
+            $scope.complete = false;
+            $scope.currentTimer = 0;
+            $scope.nextStepTimer = 0;
+            $scope.currentTimer = 0;
+            $scope.nextStepTimer = 0;
+            $scope.pastSteps = [];
+            $scope.timerId = 0;
+        };
+
         $scope.goHome = () => {
             $location.path('');
         };
@@ -27,6 +37,11 @@
         };
 
         $scope.doRun = () => {
+
+            if ($scope.complete) {
+                $scope.reset();
+                activate();
+            }
 
             $scope.currentStep = $scope.nextStep;
             $scope.nextStep = $scope.meal.steps.length > 0 ? $scope.meal.steps.shift() : stepClass.build();
@@ -114,6 +129,8 @@
         $scope.hasRemainingSteps = () => {
             return $scope.meal.stepCount() > 0;
         };
+
+        $scope.reset();
 
         activate();
 
